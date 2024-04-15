@@ -13,10 +13,6 @@ type LinkedList struct {
 	headNode *Node
 }
 
-type Error interface {
-	Error() string
-}
-
 func (linkedList *LinkedList) InsertAtHead(m int) {
 	node := Node{}
 	node.value = m
