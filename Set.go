@@ -28,8 +28,33 @@ func (set *Set) ContainsElement(m int) bool {
 	return exists
 }
 
+func (set *Set) IntersectionSet(secondSet *Set) *Set {
+	intersectionSet := &Set{}
+	intersectionSet.New()
+	for value := range set.integerMap {
+		if secondSet.ContainsElement(value) {
+			intersectionSet.AddElement(value)
+		}
+	}
+	return intersectionSet
+}
+
+func (set *Set) UnionSet(secondSet *Set) *Set {
+	unionSet := &Set{}
+	unionSet.New()
+	var value int
+	for value = range set.integerMap {
+		unionSet.AddElement(value)
+	}
+	for value = range secondSet.integerMap {
+		unionSet.AddElement(value)
+	}
+	return unionSet
+}
+
 func main() {
 	set := &Set{}
+	var anotherSet *Set
 	set.New()
 	set.AddElement(2)
 	set.AddElement(1)
@@ -39,4 +64,11 @@ func main() {
 	set.DeleteElement(2)
 	fmt.Println(set)
 	fmt.Println(set.ContainsElement(7))
+	anotherSet = &Set{}
+	anotherSet.New()
+	anotherSet.AddElement(2)
+	anotherSet.AddElement(4)
+	anotherSet.AddElement(5)
+	fmt.Println(set.IntersectionSet(anotherSet))
+	fmt.Println(set.UnionSet(anotherSet))
 }
